@@ -27,7 +27,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-   
+     # Setup gcloud CLI
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v0
 
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
@@ -35,11 +37,8 @@ jobs:
         gcloud --quiet auth configure-docker
 
     # Get the GKE credentials so we can deploy to the cluster
-    - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e
-      with:
-        cluster_name: ${{ env.GKE_CLUSTER }}
-        location: ${{ env.GKE_ZONE }}
-        credentials: ${{ secrets.GKE_SA_KEY }}
+    - run: |-
+        gcloud container clusters get-credentials cluster-1 --zone us-central1-c
 
     # Build the Docker image
     - name: Build

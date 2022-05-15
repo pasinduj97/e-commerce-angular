@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: hello-app
-        image: gcr.io/linen-jet-349915/static-site:$GITHUB_SHA
+        image: gcr.io/linen-jet-349915/static-site@sha256:6a20b8765516a8ecfa409203fe4021feabb7ca2cb28749d7f515bf09a8f1a14e
         ports:
         - containerPort: 4070
         resources:

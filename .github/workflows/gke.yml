@@ -1,8 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: Build and Deploy to GKE
 
 on:
@@ -12,9 +7,9 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: cluster-1    # Add your cluster name here.
-  GKE_ZONE: us-central1-c   # Add your cluster zone here.
-  DEPLOYMENT_NAME: gke-hello-app # Add your deployment name here.
+  GKE_CLUSTER: cluster-1    
+  GKE_ZONE: us-central1-c  
+  DEPLOYMENT_NAME: gke-hello-app 
   IMAGE: static-site
 
 jobs:
@@ -25,21 +20,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
-    
-
-  
-        
-    - uses: 'google-github-actions/auth@v0'
-      with:
-        credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
-
-    # Get the GKE credentials so we can deploy to the cluster
-    - uses: 'google-github-actions/get-gke-credentials@v0'
-      with:
-        cluster_name: ${{ env.GKE_CLUSTER }}
-        location:  ${{ env.GKE_ZONE }}
-        project_id: ${{secrets.GKE_PROJECT}}
+      uses: actions/checkout@v3        
         
     #login to docker    
     - name: Log in to Docker Hub

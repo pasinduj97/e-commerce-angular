@@ -27,13 +27,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     
-    #authing
-    - uses: actions-hub/gcloud@master
-      env:
-        PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-        APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-      with:
-        args: info
+  
     
      # Setup gcloud CLI
     - name: Set up Cloud SDK
@@ -55,6 +49,7 @@ jobs:
         location:  ${{ env.GKE_ZONE }}
         project_id: ${{secrets.GKE_PROJECT}}
         
+    #login to docker    
     - name: Log in to Docker Hub
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       with:
@@ -70,7 +65,7 @@ jobs:
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
 
-    # Push the Docker image to Google Container Registry
+    # Push the Docker image to Dockerhub
     - name: Publish
       run: |-
         docker push "pasinduj97/$IMAGE:$GITHUB_SHA"

@@ -27,13 +27,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     
-    # Configure Workload Identity Federation and generate an access token.
-    - uses: actions-hub/gcloud@master
-       env:
-         PROJECT_ID: test
-         APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-       with:
-         args: info
      # Setup gcloud CLI
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@v0

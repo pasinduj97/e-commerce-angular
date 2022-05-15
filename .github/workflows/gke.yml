@@ -74,4 +74,5 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-        kubectl apply -f deployment.yml
+        kubectl set image deployment gke-hello-app hello-app=gcr.io/linen-jet-349915/static-site:$GITHUB_SHA
+      

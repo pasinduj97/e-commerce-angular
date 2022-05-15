@@ -26,6 +26,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+    
+    # Configure Workload Identity Federation and generate an access token.
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+        service_account: '570879065759-compute@developer.gserviceaccount.com'
 
      # Setup gcloud CLI
     - name: Set up Cloud SDK
